@@ -1,0 +1,760 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[a4paper,margin=28mm]{geometry}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\usepackage{microtype}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\numberwithin{equation}{section}
+\DeclareMathOperator{\co}{co_2}
+\DeclareMathOperator{\ex}{ex}
+\DeclareMathOperator{\exco}{exco_2}
+\newcommand{\F}{K_5^{=}}
+\newcommand{\Km}{K_4^{(3)-}}
+
+% Research draft, 10 October 2026. Claims concern the specified v3 conjectures.
+% No assertion of bibliographic priority or globally optimal lower bounds.
+\title{Counterexamples to two squared-codegree Tur\'an conjectures}
+\author{Jialin He\thanks{School of Mathematical Sciences, Key Laboratory of MEA
+ (Ministry of Education), Shanghai Key Laboratory of PMMP, and Nantong Institute
+ for Applied Mathematics and Artificial Intelligence, East China Normal
+ University, Shanghai 200241, China. Emails: \texttt{jlhe@math.ecnu.edu.cn}.
+ Supported in part by the National Natural Science Foundation of China
+ (grant 12601663) and the Science and Technology Commission of Shanghai
+ Municipality (grant 22DZ2229014).}}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We study two five-vertex hypergraph Tur\'an problems posed by Balogh,
+Clemen, and Lidick\'y. For $K_5^{=}$, the complete three-uniform hypergraph
+on five vertices with two edges intersecting in one vertex deleted,
+a four-part construction disproves their squared-codegree density
+conjecture. It gives squared-codegree density at least
+$\frac{391686088}{1029059101}\approx0.3806$ and improves the ordinary
+Tur\'an lower bound to $\frac{2235+76\sqrt{114}}{5082}\approx0.5995$.
+For $J_4$, the suspension of $K_4$, we correct the count for the known
+iterated blow-up of the Fano complement and obtain squared-codegree
+density at least $16/57$, exceeding the proposed value $7/25$.
+We further prove that $16/57$ is optimal within this recursive family,
+allowing arbitrary part sizes and recursion depths. The proofs use
+explicit constructions, finite counting identities, and a nonnegative
+weighted-square identity.
+\end{abstract}
+
+\section{Introduction}
+
+Balogh, Clemen, and Lidick\'y~\cite{BCLpublished,BCL} study hypergraph
+Tur\'an problems in which the sum of squared pair codegrees replaces the
+number of edges. Their survey proposes numerical values for several
+forbidden hypergraphs. We address two of its five-vertex cases: the
+hypergraph $K_5^{=}$ and the suspension $J_4$ of $K_4$. For $K_5^{=}$ we
+construct a counterexample to the squared-codegree conjecture and improve
+the ordinary lower bound. For $J_4$ we obtain a larger lower bound by
+correcting the count of an existing recursive construction.
+
+For a positive integer $m$, write $[m]=\{1,\ldots,m\}$. For a finite
+set $X$ and a nonnegative integer $r$, let $\binom Xr$ denote the family
+of its $r$-element subsets.
+For a finite three-uniform hypergraph $H$ with vertex set $V(H)$ and
+edge set $E(H)$, write $e(H)=|E(H)|$. For distinct $u,v\in V(H)$,
+let $d_H(u,v)$ be the number of edges containing $\{u,v\}$. Define
+\[
+ \co(H)=\sum_{\{u,v\}\in\binom{V(H)}2}d_H(u,v)^2.
+\]
+For a fixed three-uniform hypergraph $F$, call $H$ $F$-free if it contains
+no subhypergraph isomorphic to $F$; the copy need not be induced.
+Let $\ex(n,F)$ and $\exco(n,F)$ denote the
+maximum values of $e(H)$ and $\co(H)$, respectively, over all $F$-free
+hypergraphs on $n$ vertices. We use the normalizations
+\begin{equation*}
+ \pi(F)=\lim_{n\to\infty}\frac{\ex(n,F)}{\binom n3},
+ \quad
+ \text{and}
+ \quad
+ \sigma(F)=\lim_{n\to\infty}
+ \frac{\exco(n,F)}{\binom n2(n-2)^2}.
+\end{equation*}
+Both limits exist; see~\cite[Section~1]{BCL}. For construction sequences
+whose orders tend to infinity, write $n=|V(H)|$. The normalizations
+$6e(H)/n^3$ and $2\co(H)/n^4$ give the ordinary and squared-codegree
+limits, respectively.
+We cite the published survey as~\cite{BCLpublished}
+and its revised version as~\cite{BCL}. Numbered references to their
+survey refer throughout to~\cite{BCL}.
+
+\paragraph{A counterexample for $K_5^{=}$.}
+Let $\F$ be the three-uniform hypergraph on $[5]$ with
+\(E(\F)=\binom{[5]}3\setminus\{123,145\},
+\)
+where a string such as $123$ denotes $\{1,2,3\}$. Thus the two missing
+edges intersect in one vertex. Balogh, Clemen, and
+Lidick\'y~\cite[Conjecture~3.6]{BCL} conjecture that
+\begin{equation}\label{eq:conjecture}
+ \pi(\F)=\frac{227}{387},\qquad
+ \sigma(\F)=\frac{2909}{8127}.
+\end{equation}
+Using the three-part construction described by Balogh, Clemen, and
+Lidick\'y~\cite[Section~3.19]{BCL}, a machine-generated online
+comment~\cite[comment~1]{ProbXiv} obtains the corrected ordinary lower bound
+\[
+ \pi(\F)\ge\frac59+\frac19\cdot\frac27
+ =\frac{37}{63}>\frac{227}{387}.
+\]
+Our first result improves this corrected ordinary lower bound of $37/63$
+and disproves the squared-codegree assertion in~\eqref{eq:conjecture}.
+
+\begin{theorem}\label{thm:main}
+The ordinary and squared-codegree Tur\'an densities of $\F$ satisfy
+\begin{align}
+ \pi(\F)&\ge\frac{2235+76\sqrt{114}}{5082}>\frac{37}{63},
+           \label{eq:mainordinary}\\
+ \sigma(\F)&\ge\frac{391686088}{1029059101}>\frac{2909}{8127}.
+           \label{eq:mainsquared}
+\end{align}
+These lower bounds are approximately $0.5995$ and $0.3806$,
+respectively, and are attained as limits by two sequences in the same
+four-part family.
+\end{theorem}
+
+\paragraph{An improved lower bound for $J_4$.}
+The hypergraph $J_4$ is obtained by adjoining one common vertex to each
+edge of $K_4$; explicitly, $E(J_4)=\{123,124,125,134,135,145\}$.
+Balogh, Clemen, and Lidick\'y~\cite[Conjecture~3.4]{BCL} propose
+\begin{equation}\label{eq:J4conjecture}
+ \sigma(J_4)=0.28=\frac7{25}.
+\end{equation}
+Their calculation uses balanced iterations of the complement of the
+Fano plane, a construction already considered by Bollob\'as, Leader,
+and Malvenuto~\cite{BLM} for the ordinary Tur\'an problem. Our second
+result improves the lower bound for $\sigma(J_4)$ by correcting the
+count of this recursive construction.
+
+\begin{theorem}\label{thm:J4}
+The squared-codegree Tur\'an density of $J_4$ satisfies
+\begin{equation*}
+ \sigma(J_4)\ge\frac{16}{57}=\frac7{25}+\frac1{1425}.
+\end{equation*}
+Moreover, balanced iterations of the complement of the Fano plane have limiting
+squared-codegree density $16/57$.
+\end{theorem}
+
+Theorem~\ref{thm:J4} refutes~\eqref{eq:J4conjecture}. We also prove that
+$16/57$ is optimal within the Fano-complement recursive family, even
+with arbitrary part sizes and recursion depths
+(see Lemma~\ref{lem:fano-tree}). 
+
+Section~\ref{sec:K5} gives the four-part construction and proves
+Theorem~\ref{thm:main}. In Section~\ref{sec:J4}, we prove
+Theorem~\ref{thm:J4} and the subsequent optimality statement for the
+Fano-complement recursive family.
+
+\section{A counterexample for \texorpdfstring{$K_5^{=}$}{K5=}}\label{sec:K5}
+
+We first establish a sufficient condition for a four-part construction
+to be $\F$-free. We then choose the internal hypergraphs and part
+proportions to obtain the two bounds in Theorem~\ref{thm:main}.
+
+\subsection{Construction and weighted counting}\label{sec:construction}
+
+Write $\Km$ for the complete three-uniform hypergraph on four vertices
+with one edge deleted.
+Let $\mathcal D$ be a loopless directed graph on $[4]$. Partition a finite
+vertex set into four possibly empty parts $V_1,\ldots,V_4$.
+For each $i\in[4]$, let $H_i$ be a three-uniform
+hypergraph with vertex set $V_i$. Include every triple meeting three distinct parts.
+For each arc $i\to j$ of $\mathcal D$, include every triple with two vertices in
+$V_i$ and one in $V_j$. Finally, include the edges of each $H_i$.
+Denote the resulting hypergraph by $H(\mathcal D;H_1,\ldots,H_4)$.
+The use of directed graphs to prescribe edges meeting exactly two parts
+also appears in Markstr\"om~\cite{Markstrom}.
+
+The next lemma isolates the structural condition that permits internal
+edges without creating the forbidden five-vertex hypergraph.
+
+\begin{lemma}\label{lem:free}
+Suppose that every $H_i$ is $\Km$-free. If every vertex of $\mathcal D$ has outdegree
+at most one and $\mathcal D$ has no directed two-cycle, then
+$H(\mathcal D;H_1,\ldots,H_4)$ is $\F$-free.
+\end{lemma}
+
+\begin{proof}
+Suppose, for a contradiction, that the construction contains a copy of
+$\F$ with vertex set $U$. Then $U$ has at most two missing triples, and
+any two missing triples must intersect in exactly one vertex. Since
+every four vertices of $\F$ span at least three edges and each $H_i$ is
+$\Km$-free, we have $|U\cap V_i|\le3$ for every $i\in[4]$.
+
+Suppose that $|U\cap V_i|=3$ for some $i$. For any
+$v\in U\setminus V_i$, say $v\in V_j$, the arc $i\to j$ must be present. Otherwise the three triples consisting of $v$ and two vertices of
+$U\cap V_i$ are missing. As $i$ has outdegree at most one, both vertices
+of $U\setminus V_i$ lie in the same part $V_j$. The absence of directed
+two-cycles implies that $j\to i$ is absent. These two vertices, together
+with each vertex of $U\cap V_i$, give three missing triples, a
+contradiction. Thus $|U\cap V_i|\le2$ for every $i\in[4]$.
+
+Since $|U|=5$ and there are only four parts, some part satisfies
+$U\cap V_i=\{a,b\}$. Among the three triples $\{a,b,x\}$ with
+$x\in U\setminus V_i$, at most one can be missing, since any two
+intersect in the pair $\{a,b\}$. Thus there are distinct
+$c,d\in U\setminus V_i$ such that both $\{a,b,c\}$ and $\{a,b,d\}$
+are edges. By the construction, the parts containing $c$ and $d$ must
+have labels that are outneighbors of $i$. Since $i$ has outdegree at
+most one, $c$ and $d$ lie in the same part $V_j$, with $i\to j$.
+The absence of directed two-cycles implies that $j\to i$ is absent.
+Hence $\{a,c,d\}$ and $\{b,c,d\}$ are missing and intersect in the
+pair $\{c,d\}$, a contradiction. Therefore the construction is
+$\F$-free.
+\end{proof}
+
+We now specify the internal hypergraphs using a classical six-vertex
+construction. To make the counting self-contained, define $S$ on $[6]$ by
+\begin{equation*}
+ E(S)=\{123,125,136,145,146,234,246,256,345,356\}.
+\end{equation*}
+This is the hypergraph used in the iterated construction of
+Frankl and F\"uredi~\cite{FF}; see also~\cite[Section~3.9]{BCL}.
+The edge list shows that every four vertices of $S$ span exactly two
+edges and every pair has codegree two.
+
+We define a sequence $(S_k)_{k\ge0}$ recursively. Let $S_0$ consist of
+one vertex and no edges. For each $k\ge1$, having defined $S_{k-1}$,
+take six vertex-disjoint copies of $S_{k-1}$ with vertex sets
+$W_1,\ldots,W_6$. To form $S_k$, retain all edges within these copies
+and, for each $\{i,j,\ell\}\in E(S)$, add every triple with one vertex
+in each of $W_i,W_j,W_\ell$. No other edges are added. In particular,
+no edge meets exactly two of the sets $W_i$. Thus $S_1\cong S$ and
+$|V(S_k)|=6|V(S_{k-1})|=6^k$ for $k\ge1$.
+
+\begin{lemma}\label{lem:internal}
+For every integer $k\ge0$, the hypergraph $S_k$ is $\Km$-free and, with
+$n=6^k$ vertices, satisfies
+\begin{equation}\label{eq:internalfinite}
+ e(S_k)=\frac{n^3-n}{21},\quad
+ \text{and} 
+ \quad
+ \co(S_k)=\frac{2(n^4-n)}{43}.
+\end{equation}
+As $k\to\infty$, the ordinary and squared-codegree densities of $S_k$
+tend to $\rho=2/7$ and $\tau=4/43$, respectively.
+\end{lemma}
+
+\begin{proof}
+We proceed by induction on $k$. The case $k=0$ is immediate. Suppose
+that $k\ge1$ and the assertions hold for $S_{k-1}$.
+Let $U$ be a four-element subset of $V(S_k)$. If $U\subseteq W_i$ for
+some $i$, it spans at most two edges by induction. If the vertices of
+$U$ lie in four distinct parts, they span exactly two edges by the
+four-vertex property of $S$. Otherwise, some part satisfies
+$r=|U\cap W_i|\in\{2,3\}$. Every triple consisting of two vertices
+of $U\cap W_i$ and one vertex of $U\setminus W_i$ is missing. There
+are $\binom r2(4-r)\ge2$ such triples, so $U$ spans at most two edges.
+Hence $S_k$ is $\Km$-free.
+
+For the counts, put $m=6^{k-1}$, so $|W_i|=m$ and $n=6m$.
+The ten edges of $S$ contribute $10m^3$ edges meeting three parts.
+Since every pair of vertices of $S$ has codegree two, each pair in
+distinct parts of $S_k$ has codegree $2m$. There are $15m^2$ such
+pairs, contributing $15m^2(2m)^2=60m^4$ to $\co(S_k)$.
+Pairs within a part have only internal common neighbors. Consequently,
+\[
+ e(S_k)=10m^3+6e(S_{k-1}),\quad
+ \text{and}
+ \quad
+ \co(S_k)=60m^4+6\co(S_{k-1}).
+\]
+Applying the induction hypotheses to $S_{k-1}$, which has $m$ vertices,
+and using $n=6m$, we obtain
+\begin{align*}
+ e(S_k)&=10m^3+\frac{6(m^3-m)}{21}
+        =\frac{(6m)^3-6m}{21}
+        =\frac{n^3-n}{21},\\
+ \intertext{and}
+ \co(S_k)&=60m^4+\frac{12(m^4-m)}{43}
+         =\frac{2((6m)^4-6m)}{43}
+         =\frac{2(n^4-n)}{43}.
+\end{align*}
+This proves~\eqref{eq:internalfinite} and completes the induction.
+Multiplying the first by $6/n^3$ and the second by $2/n^4$ gives
+the limits $2/7$ and $4/43$.
+\end{proof}
+
+We now count hypergraphs of the form $H(\mathcal D;H_1,\ldots,H_4)$.
+Fix a loopless directed graph $\mathcal D$ on $[4]$ with outdegree at
+most one and no directed two-cycle. Let $x=(x_1,\ldots,x_4)$ be a vector
+of nonnegative target part proportions with $\sum_i x_i=1$.
+All class indices in the following definitions and weighted formulas
+range over $[4]$. Define
+\[
+ L_i=\sum_{j:i\to j}x_j,\qquad
+ C_{ij}=1-x_i-x_j+\mathbf1_{i\to j}x_i+\mathbf1_{j\to i}x_j
+ \quad(i\ne j).
+\]
+Here $\mathbf1_{i\to j}$ is $1$ if $i\to j$ is an arc of $\mathcal D$
+and $0$ otherwise. Sums indexed by $i\to j$ run over the arcs of
+$\mathcal D$.
+For sequences in this family with orders tending to infinity and
+part proportions tending to $x$, $L_i$ is the limiting proportion of
+common neighbors outside $V_i$ for a pair
+within $V_i$, while $C_{ij}$ is the limiting proportion of all common
+neighbors for a pair in distinct parts $V_i,V_j$. Both proportions are
+taken relative to the total number of vertices.
+
+\begin{lemma}\label{lem:weighted}
+There is a sequence of $\F$-free hypergraphs of the form
+$H(\mathcal D;H_1,\ldots,H_4)$ whose orders tend to infinity and whose
+part proportions tend to $x$. Their ordinary and squared-codegree
+densities converge, respectively, to
+\begin{align}
+ P_{\mathcal D}(x)&=6\sum_{i<j<\ell}x_ix_jx_\ell
+          +3\sum_{i\to j}x_i^2x_j+\rho\sum_i x_i^3,
+          \label{eq:weightedP}\\
+ Q_{\mathcal D}(x)&=2\sum_{i<j}x_ix_j C_{ij}^2
+          +\sum_i x_i^2\bigl(L_i^2+2\rho x_iL_i+\tau x_i^2\bigr),
+          \label{eq:weightedQ}
+\end{align}
+where $\rho=2/7$ and $\tau=4/43$.
+\end{lemma}
+
+\begin{proof}
+We form $H(\mathcal D;H_1,\ldots,H_4)$ by choosing each internal
+hypergraph $H_i$ as a suitable blow-up of $S_k$ from
+Lemma~\ref{lem:internal}.
+
+First suppose that $x_1,\ldots,x_4$ are rational. For each integer
+$k\ge0$, let $n$ be $6^k$ times a fixed positive common denominator of
+these four numbers. Thus $n\to\infty$ as $k\to\infty$.
+For each $i\in[4]$, replace each vertex of a separate copy of $S_k$
+by $nx_i/6^k$ independent clones, including all triples whose original
+vertices form an edge. Denote the resulting internal hypergraph by
+$H_i$ and its vertex set by $V_i$. Since $S_k$ has $6^k$ vertices,
+$|V_i|=nx_i$, with $V_i$ empty when $x_i=0$. 
+
+Four clones of distinct original vertices span at most two edges by
+Lemma~\ref{lem:internal}. If two of the four clones have the same original
+vertex, both triples containing that pair are absent, so again at most
+two edges remain. Thus each $H_i$ is $\Km$-free, and Lemma~\ref{lem:free}
+shows that $H=H(\mathcal D;H_1,\ldots,H_4)$ is $\F$-free.
+
+Cloning multiplies the edge count by the cube of the number of clones
+per vertex, and the squared-codegree sum by its fourth power since a pair
+of distinct original vertices gives the square of that number of clone
+pairs, each with internal codegree multiplied by the same number.
+Two clones of the same vertex have codegree zero in $H_i$.
+Consequently,~\eqref{eq:internalfinite} gives
+\begin{align*}
+ \frac{6e(H_i)}{n^3}
+   &=\frac{6x_i^3}{6^{3k}}e(S_k)
+     =\rho x_i^3(1-6^{-2k}),\quad
+    \text{and}\quad
+ \frac{2\co(H_i)}{n^4}
+   =\frac{2x_i^4}{6^{4k}}\co(S_k)
+     =\tau x_i^4(1-6^{-3k}).
+\end{align*}
+Counting edges that meet three parts, two parts, or one part, and using
+$|V_i|=nx_i$, we obtain the exact identity
+\[
+\begin{aligned}
+ \frac{6e(H)}{n^3}
+   ={}&6\sum_{i<j<\ell}x_ix_jx_\ell
+       +3\sum_{i\to j}x_i\left(x_i-\frac1n\right)x_j
+    +\sum_i\frac{6e(H_i)}{n^3}.
+\end{aligned}
+\]
+Substituting the first internal count above and letting $k\to\infty$
+gives~\eqref{eq:weightedP}.
+
+To count squared codegrees, let
+$\varepsilon_{ij}=\mathbf1_{i\to j}+\mathbf1_{j\to i}$.
+For $u\in V_i$ and $v\in V_j$ with $i\ne j$, the codegree is
+\[
+\begin{aligned}
+ d_H(u,v)&=n(1-x_i-x_j)
+       +\mathbf1_{i\to j}(nx_i-1)+\mathbf1_{j\to i}(nx_j-1)
+        =nC_{ij}-\varepsilon_{ij}.
+\end{aligned}
+\]
+The terms $nx_i-1$ and $nx_j-1$ exclude the endpoints $u$ and $v$,
+respectively. For distinct $u,v\in V_i$, we have
+$d_H(u,v)=nL_i+d_{H_i}(u,v)$.
+Expanding the square gives
+\[
+ d_H(u,v)^2=n^2L_i^2+2nL_i\,d_{H_i}(u,v)+d_{H_i}(u,v)^2.
+\]
+When we sum over all pairs in $V_i$, the internal codegrees sum to
+$3e(H_i)$, because each internal edge contains three pairs. Hence the
+middle terms contribute $2nL_i\cdot3e(H_i)=6nL_i e(H_i)$, while the
+last terms contribute $\co(H_i)$.
+There are $n^2x_ix_j$ pairs between $V_i$
+and $V_j$, and $\binom{nx_i}{2}$ pairs within $V_i$. Summing their
+squared codegrees and multiplying by $2/n^4$ gives
+\begin{equation*}
+\begin{split}
+ \frac{2\co(H)}{n^4}
+   ={}&2\sum_{i<j}x_ix_j\left(C_{ij}-\frac{\varepsilon_{ij}}n\right)^2
+     +\sum_i\left[
+       x_i\left(x_i-\frac1n\right)L_i^2
+       +2L_i\frac{6e(H_i)}{n^3}
+       +\frac{2\co(H_i)}{n^4}\right].
+\end{split}
+\end{equation*}
+Substituting the two internal counts above and letting $k\to\infty$,
+the three terms in brackets tend to $x_i^2L_i^2$,
+$2\rho x_i^3L_i$, and $\tau x_i^4$, respectively. The first sum tends
+to $2\sum_{i<j}x_ix_jC_{ij}^2$, proving~\eqref{eq:weightedQ}.
+
+Finally, we extend the construction to real part proportions; this
+allows us to use the irrational proportions in the proof of
+Theorem~\ref{thm:main}. Given any such $x$, choose a sequence
+$(x^{(j)})_{j\ge1}$ of rational four-dimensional vectors with nonnegative
+coordinates summing to one and $x^{(j)}\to x$.
+For each integer $j\ge1$, the rational case provides an $\F$-free
+hypergraph $H$ on $n\ge j$ vertices with part proportions $x^{(j)}$,
+such that its two normalized densities differ from
+$P_{\mathcal D}(x^{(j)})$ and $Q_{\mathcal D}(x^{(j)})$, respectively,
+by less than $1/j$. For these chosen graphs,
+\(
+ \left|\frac{6e(H)}{n^3}-P_{\mathcal D}(x)\right|
+\le\frac1j+\left|P_{\mathcal D}(x^{(j)})-P_{\mathcal D}(x)\right|,
+ \)
+ and
+ \(
+ \left|\frac{2\co(H)}{n^4}-Q_{\mathcal D}(x)\right|
+\le\frac1j+\left|Q_{\mathcal D}(x^{(j)})-Q_{\mathcal D}(x)\right|.
+\)
+Both right-hand sides tend to zero by continuity of the two polynomials.
+Since $n\ge j$ and $x^{(j)}\to x$, these graphs also have orders tending
+to infinity and part proportions tending to $x$, as required.
+\end{proof}
+
+\subsection{The two density bounds}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+We use the same four-part family for both bounds, with different part
+proportions. Relabel the four parts $1,2,3,4$ as $A,B,C,D$,
+respectively, and write $x=(x_A,x_B,x_C,x_D)$. Let $\mathcal D$ have
+the arcs
+\begin{equation*}
+ A\to B,\quad B\to C,\quad C\to A,\quad D\to A.
+\end{equation*}
+Every vertex of $\mathcal D$ has outdegree one, and there is no directed
+two-cycle. Thus Lemma~\ref{lem:weighted} provides an $\F$-free sequence
+with limiting densities $P_{\mathcal D}(x)$ and $Q_{\mathcal D}(x)$ for
+every vector $x$ of nonnegative part proportions summing to one.
+In particular, $\pi(\F)\ge P_{\mathcal D}(x)$ and
+$\sigma(\F)\ge Q_{\mathcal D}(x)$. It remains to choose suitable
+proportions for each bound.
+
+For the ordinary density, let $t\in[0,1]$ be a parameter to be chosen
+later, and set $x_A=x_B=x_C=(1-t)/3$ and $x_D=t$.
+Writing $p(t)=P_{\mathcal D}(x)$, substitution
+in~\eqref{eq:weightedP} gives
+\begin{equation*}
+\begin{split}
+ p(t)=\frac{37}{63}(1-t)^3+2t(1-t)^2+t^2(1-t)+\frac27t^3
+     =\frac{37+15t-78t^2+44t^3}{63}.
+\end{split}
+\end{equation*}
+Its derivative is $(15-156t+132t^2)/63$. The two roots are
+$(13\pm\sqrt{114})/22$, and only the smaller root lies in $[0,1]$.
+On $[0,1]$, the derivative is positive before that root and negative
+after it.
+Therefore
+\begin{equation}\label{eq:pmax}
+ \max_{0\le t\le1}p(t)
+ =p\left(\frac{13-\sqrt{114}}{22}\right)
+ =\frac{2235+76\sqrt{114}}{5082}.
+\end{equation}
+This proves~\eqref{eq:mainordinary}. Since $p(0)=37/63$ and $p'(0)>0$,
+the bound strictly exceeds the corrected three-part value. The maximum
+in~\eqref{eq:pmax} concerns only the indicated one-parameter subfamily.
+
+For the squared-codegree density, take
+$x=\left(\frac{13}{43},\frac{12}{43},\frac{12}{43},\frac{6}{43}\right)$ in the
+order $A,B,C,D$. Then
+\(
+ (L_A,L_B,L_C,L_D)
+ =\left(\frac{12}{43},\frac{12}{43},\frac{13}{43},\frac{13}{43}\right),\)
+ and
+\[ (C_{AB},C_{AC},C_{AD},C_{BC},C_{BD},C_{CD})
+ =\left(\frac{31}{43},\frac{30}{43},\frac{30}{43},
+          \frac{31}{43},\frac{25}{43},\frac{25}{43}\right).
+\]
+Substitution in~\eqref{eq:weightedQ} gives
+\begin{equation*}
+ \begin{split}
+ Q_{\mathcal D}(x)
+ =\frac{1}{43^4}\left(1253292+\frac{4\cdot72372}{7}
+                      +\frac{4\cdot71329}{43}\right)
+ =\frac{391686088}{1029059101}
+  =\frac{2909}{8127}+\frac{90033181}{3969227961}.
+ \end{split}
+\end{equation*}
+Together with Lemma~\ref{lem:weighted}, this proves
+\eqref{eq:mainsquared} and completes the proof.
+\end{proof}
+
+The two lower bounds use different proportions. Neither the full
+four-variable optimization nor the exact values of $\pi(\F)$ and
+$\sigma(\F)$ are determined here.
+
+\section{An improved lower bound for \texorpdfstring{$J_4$}{J4}}\label{sec:J4}
+
+The link of a vertex $v$ in a three-uniform hypergraph is the graph on
+the remaining vertices in which $uw$ is an edge exactly when $vuw$ is
+a hyperedge. A hypergraph is $J_4$-free precisely when all its vertex
+links are $K_4$-free. We use this characterization to verify the Fano
+construction and then count its squared codegrees.
+
+\begin{proof}[Proof of Theorem~\ref{thm:J4}]
+Let $B$ be the complement of a Fano plane on vertex set $[7]$.
+The triples of the plane are called its lines; these are precisely
+the triples missing from $B$. The hypergraph $B$ has
+$28$ edges; each pair has codegree four. At a fixed vertex, its link
+is $K_6$ minus a perfect matching, that is, $K_{2,2,2}$.
+Set $B_0$ to be a single vertex with no edges. For each integer $k\ge1$,
+construct $B_k$ from seven vertex-disjoint copies of $B_{k-1}$ labelled
+by the vertices of $B$. Retain the edges within each copy, and add every
+triple meeting three distinct copies whose labels form an edge of $B$.
+No triples meeting exactly two copies are added.
+In the link of a vertex of $B_k$, the portion outside its
+first-level part is a blow-up of $K_{2,2,2}$, hence a complete
+tripartite graph. The portion inside
+that part is a vertex link in $B_{k-1}$, and there are no link edges
+between these two portions. Induction shows that the entire link has
+no $K_4$. Thus $B_k$ is $J_4$-free.
+
+For $k\ge1$, put $n=7^k$ and $m=7^{k-1}$. Pairs in distinct first-level parts
+have codegree $4m$. There are $21m^2$ such pairs, contributing
+$21m^2(4m)^2=336m^4$ to $\co(B_k)$.
+Pairs within one part have no common neighbors outside that part,
+since no edge meets exactly two parts. Thus each of the seven parts
+contributes precisely $\co(B_{k-1})$, and
+\[
+ \co(B_k)=336\cdot7^{4(k-1)}+7\co(B_{k-1}).
+\]
+Dividing the recurrence by $7^{4k}$ gives a factor $7^{-3}$ in front
+of the preceding normalized term. Starting from $\co(B_0)=0$, we obtain
+\[
+ \frac{\co(B_k)}{7^{4k}}
+ =\frac{336}{7^4}\sum_{j=0}^{k-1}7^{-3j}
+ =\frac8{57}(1-7^{-3k}),
+\]
+where the last equality uses the geometric sum and
+$336/[7^4(1-7^{-3})]=8/57$. Since $n=7^k$, this gives the exact count
+\begin{equation}\label{eq:J4finite}
+ |V(B_k)|=n=7^k,\quad
+ \text{and}\quad \co(B_k)=\frac{8(n^4-n)}{57}.
+\end{equation}
+Consequently,
+\[
+ \frac{2\co(B_k)}{n^4}=\frac{16}{57}(1-n^{-3})
+ \longrightarrow\frac{16}{57}.
+\]
+Since every $B_k$ is $J_4$-free, this limit proves the asserted lower bound.
+\end{proof}
+
+The factor seven in the recurrence accounts for all seven recursive
+parts. After normalization by $n^4$, successive levels therefore
+contribute in the ratio $7/7^4=1/343$.
+The calculation in~\cite[Section~3.15]{BCL} uses $1/7^4$ instead.
+Correcting this factor gives $16/57$ and refutes the numerical equality
+$\sigma(J_4)=0.28$ in Conjecture~3.4 of that version, using the same
+underlying construction.
+
+\paragraph{Optimality within the recursive family.}
+We next show that $16/57$ remains optimal when class sizes and
+recursion depths vary. Let $B$ again denote the Fano complement.
+A \emph{Fano-complement recursive construction} is specified by a
+finite rooted tree with independent vertex classes at its leaves.
+Each internal node partitions its vertex set into at most seven
+children labelled by distinct vertices of $B$. Include all triples
+meeting three children whose labels form an edge of $B$, and no triples
+meeting exactly two children. Edges within each child are defined
+recursively. This is a special case of the recursive patterns
+of Liu and Pikhurko~\cite[Definition~1.1]{LP}.
+
+For a real weight vector $x=(x_1,\ldots,x_7)$ on the vertices of $B$, put
+$W=\sum_{i=1}^7 x_i$, $d_{ij}=\sum_{k:\,ijk\in E(B)}x_k$ for distinct
+$i,j\in[7]$, and
+$N(x)=2\sum_{i<j}x_ix_jd_{ij}^2$.
+The weights need not sum to one.
+When the weights are class sizes, $d_{ij}$ is the codegree of a pair
+between classes $i,j$, and $N(x)/2$ is the total squared-codegree
+contribution from pairs in distinct classes.
+The following lemma bounds this contribution.
+
+\begin{lemma}\label{lem:fano-weight-sos}
+For nonnegative weights,
+\(
+ N(x)\le\frac{16}{57}\left(W^4-\sum_i x_i^4\right).
+\)
+\end{lemma}
+
+\begin{proof}
+For each $1\le i<j\le7$, let $k$ be the third vertex on their Fano line.
+Label the remaining vertices $a,b,c,d$ so that $kab$ and $kcd$ are lines.
+Then $d_{ij}=x_a+x_b+x_c+x_d$. For all real weights,
+$16\left(W^4-\sum_i x_i^4\right)-57N(x)$ equals
+\begin{equation*}
+\sum_{i<j}(x_i-x_j)^2\Bigl[
+      12d_{ij}^2+2(8x_i+8x_j+x_k)d_{ij}+24(x_a+x_b)(x_c+x_d)+58(x_ax_b+x_cx_d)\Bigr].
+\end{equation*}
+To check the identity, expand the bracket for each pair $i,j$.
+For $u\in\{a,b,c,d\}$, the coefficients of
+$x_u^2,x_ix_u,x_jx_u,x_kx_u$ are $12,16,16,2$, respectively.
+The coefficients of $x_ax_b$ and $x_cx_d$ are $24+58=82$;
+the other mixed products among $x_a,x_b,x_c,x_d$ have coefficient
+$24+24=48$. Multiplication by $x_i^2+x_j^2-2x_ix_j$ and summation
+over pairs give the right-hand coefficients in the table below,
+where $p,q,r,s\in[7]$ are distinct.
+\begin{center}
+\begin{tabular}{llll}
+\hline
+Monomial & Fano condition & Left-hand side & Right-hand side \\
+\hline
+$x_p^4$ & --- & $0$ & $0$ \\
+$x_p^3x_q$ & --- & $64$ & $4\cdot16=64$ \\
+$x_p^2x_q^2$ & --- & $96$ & $2\cdot4\cdot12=96$ \\
+$x_p^2x_qx_r$ & $pqr$ is a line & $192$ & $4\cdot48=192$ \\
+$x_p^2x_qx_r$ & $pqr$ is not a line & $78$ & $78$ \\
+$x_px_qx_rx_s$ & contains a line & $-300$ & $-300$ \\
+$x_px_qx_rx_s$ & contains no line & $-984$ & $-984$ \\
+\hline
+\end{tabular}
+\end{center}
+If $pqr$ is not a Fano line, the $x_p^2$ terms from the six summands
+indexed by pairs containing $p$ contribute
+$2\cdot16+2\cdot2+48+82$ to the coefficient of $x_p^2x_qx_r$.
+The mixed terms from the pairs $\{p,q\}$, $\{p,r\}$, and $\{q,r\}$
+contribute $-2(16+16+12)$. Their sum is $78$, matching
+$16\cdot12-57\cdot2$ on the left.
+For a monomial with four distinct indices, only mixed terms contribute
+on the right: its coefficient is $-2(3\cdot2+3\cdot48)=-300$ if
+the four points contain a Fano line, and $-2\cdot6\cdot82=-984$
+otherwise. On the left, the corresponding coefficients of $N(x)$
+are $4\cdot3=12$ and $4\cdot6=24$, giving
+$16\cdot24-57\cdot12=-300$ and $16\cdot24-57\cdot24=-984$.
+The table covers all monomials of degree four, proving the identity.
+For nonnegative weights, its right-hand side is nonnegative, and the
+inequality follows.
+\end{proof}
+
+\begin{lemma}\label{lem:fano-tree}
+Every Fano-complement recursive construction $H$ on $n\ge1$ vertices is
+$J_4$-free and satisfies
+\[
+ \co(H)\le\frac8{57}(n^4-n).
+\]
+The balanced iterations on $7^k$ vertices attain equality for every
+integer $k\ge0$. Consequently, the supremum of the limiting
+squared-codegree densities in this family is $16/57$, even when class
+sizes and recursion depths are chosen independently at different nodes.
+\end{lemma}
+
+\begin{proof}
+We induct on the height of the recursion tree.
+If the root is a leaf, then $H$ is independent, so it is
+$J_4$-free and $\co(H)=0\le8(n^4-n)/57$.
+Otherwise, let $H_1,\ldots,H_7$ be the hypergraphs in the root's
+children, using a hypergraph with no vertices for each unused label. Put
+$n_i=|V(H_i)|$, so that $n=\sum_i n_i$.
+As in the proof of Theorem~\ref{thm:J4}, each vertex link is the
+disjoint union of its link within its child class and a complete
+tripartite graph, possibly with empty parts. Both are $K_4$-free by
+induction and construction, respectively, so $H$ is $J_4$-free.
+
+There are $n_in_j$ pairs between children $i,j$,
+each with codegree $\sum_{k:\,ijk\in E(B)}n_k$.
+Pairs within one child have no common neighbors outside that child,
+since no edge meets exactly two children. Hence
+\[
+ \co(H)=\sum_i\co(H_i)
+   +\sum_{i<j}n_in_j\left(\sum_{k:\,ijk\in E(B)}n_k\right)^2
+ =\sum_i\co(H_i)+\frac12N(n_1,\ldots,n_7).
+\]
+Here $N(n_1,\ldots,n_7)$ is $N(x)$ evaluated at $x_i=n_i$;
+its half is exactly the contribution from pairs in distinct children.
+Since $W=\sum_i n_i=n$, Lemma~\ref{lem:fano-weight-sos} bounds this
+term. The induction hypothesis bounds
+$\co(H_i)$ for each nonempty child; empty children contribute zero.
+Thus
+\[
+ \co(H)\le\frac8{57}\left(n^4-\sum_i n_i^4\right)
+            +\frac8{57}\sum_i(n_i^4-n_i)
+          =\frac8{57}(n^4-n).
+\]
+The last equality uses the cancellation of the fourth-power terms
+and $\sum_i n_i=n$. Hence
+$2\co(H)/n^4\le(16/57)(1-n^{-3})$, giving limiting
+squared-codegree density at most $16/57$.
+By~\eqref{eq:J4finite}, the balanced iterations attain equality in
+the finite bound and have densities tending to $16/57$.
+\end{proof}
+
+Theorem~\ref{thm:J4} and Lemma~\ref{lem:fano-tree} support
+$\sigma(J_4)=16/57$ as a natural numerical revision of the conjecture
+in~\cite[Conjecture~3.4]{BCL}. This retains the proposed extremal
+construction with its corrected density. 
+
+\section*{Declaration of AI use}
+
+The author used GPT-6 to assist with exploring proof strategies,
+checking proofs, and improving the exposition. All mathematical
+arguments, results, and conclusions were reviewed and verified by the
+author, who takes full responsibility for the content of this paper.
+
+\begin{thebibliography}{9}
+
+\bibitem{BCLpublished}
+J.~Balogh, F.~C.~Clemen, and B.~Lidick\'y,
+Hypergraph Tur\'an problems in $\ell_2$-norm,
+in \emph{Surveys in Combinatorics 2022},
+London Math. Soc. Lecture Note Ser., vol.~481,
+Cambridge University Press, Cambridge, 2022, pp.~21--63.
+
+\bibitem{BCL}
+J.~Balogh, F.~C.~Clemen, and B.~Lidick\'y,
+Hypergraph Tur\'an problems in $\ell_2$-norm,
+arXiv:2108.10406v3,
+2025.
+
+\bibitem{BLM}
+B.~Bollob\'as, I.~Leader, and C.~Malvenuto,
+Daisies and other Tur\'an problems,
+\emph{Combin. Probab. Comput.} \textbf{20} (2011), 743--747.
+
+\bibitem{FF}
+P.~Frankl and Z.~F\"uredi,
+An exact result for 3-graphs,
+\emph{Discrete Math.} \textbf{50} (1984), 323--328.
+
+\bibitem{LP}
+X.~Liu and O.~Pikhurko,
+Finite hypergraph families with rich extremal Tur\'an constructions via mixing patterns,
+\emph{Forum Math. Sigma} \textbf{13} (2025), e53.
+
+\bibitem{Markstrom}
+K.~Markstr\"om,
+Two questions of Erd\H{o}s on hypergraphs above the Tur\'an threshold,
+\emph{J. Graph Theory} \textbf{76} (2014), 101--105.
+
+\bibitem{ProbXiv}
+ProbXiv,
+Comment~1 on ``Hypergraph Tur\'an problems in $\ell_2$-norm'',
+August~17, 2026. Machine-generated online contribution
+(labelled GPT-5.5 xhigh); the page reports no human review.
+Accessed October~11, 2026.
+\url{https://probxiv.com/problems/hypergraph-turan-problems-in-ell-2-norm-7}.
+
+\end{thebibliography}
+\end{document}
